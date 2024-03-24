@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random background generator</title>
+    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+    <style>
+      .background {
+        image-rendering: pixelated;
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        z-index: -10;
+      }
+
+      #background-image {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+</head>
+<body>
+  <div class="background">
+    <img id="background-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAABCAIAAACDoBMqAAAAJUlEQVR4nGMUNTNS1zqUfK38XsfvOVdfSpRbhR29HNDMpNP3FwCuDg1A8jNqlQAAAABJRU5ErkJggg=="/>
+  </div>
+  <div>
+    <form id="text-form"
+        hx-swap="outerHTML" hx-get="http://127.0.0.1:5000/background/random" hx-trigger="submit" hx-target="#background-image">
+        <textarea type="text" name="text" placeholder="Text"></textarea>
+        <input type="radio" id="random" name="mode" value="random">
+        <label for="random">Random</label>
+        <button type="submit" form="text-form">Get image</button>
+    </form>
+  </div>
+  <a href="http://127.0.0.1:5000/background/download">
+    <button>Download Image</button>
+  </a>
+</body>
+</html>
